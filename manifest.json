@@ -2,7 +2,8 @@
   "name": "Eluander",
   "short_name": "ELUANDER",
   "description": "Isso não é mágica, isso é MAGIOS.",
-
+  "theme_color": "#2a2a2a",
+  "background_color": "#2a2a2a",
   "icons": [
     {
       "src": "img/svg/eluander-logo-full-v2.svg",
@@ -14,7 +15,6 @@
       "sizes": "512x512"
     }
   ],
-
   "display": "standalone",
   "start_url": "/"
 }
