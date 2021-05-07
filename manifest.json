@@ -1,0 +1,20 @@
+{
+  "name": "Eluander",
+  "short_name": "ELUANDER",
+  "description": "Isso não é mágica, isso é MAGIOS.",
+
+  "icons": [
+    {
+      "src": "img/svg/eluander-logo-full-v2.svg",
+      "sizes": "192x192"
+    },
+
+    {
+      "src": "img/svg/eluander-logo-full-v2.svg",
+      "sizes": "512x512"
+    }
+  ],
+
+  "display": "standalone",
+  "start_url": "/"
+}
