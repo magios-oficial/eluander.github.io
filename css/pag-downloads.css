@@ -2,6 +2,25 @@
   --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
 }
 
+input[type='radio'] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+
+.btn-filtro {
+	width: 150px !important;
+	margin-left: 9px;
+}
+
+#lst-radio-groups {
+	margin: 0 auto; 
+    text-align: center;
+    width: inherit;
+    display: inline-block;
+}
+
 body {
   background: #111 !important;
 }
