@@ -1,11 +1,11 @@
 $(function(){
 	
 	let eGrupoDownload = {
-		Brawser: 1,
-		Antivirus: 2,
-		Game: 3,
-		Player: 4,
-		Dev: 5
+		Browser : "Browsers",
+		Antivirus : "Antivirus",
+		Game : "Games",
+		Player : "Players",
+		Dev : "Devs"
 	}
 	
 	let eArquitetura = {
@@ -17,7 +17,7 @@ $(function(){
 	
 	var listaDownloads = [{
 		id: 1,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/768px-Google_Chrome_icon_%28September_2014%29.svg.png",
 		title: "Google Chrome",
 		description: "Navegador de internet",
@@ -26,7 +26,7 @@ $(function(){
 	},
 	{
 		id: 2,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/768px-Google_Chrome_icon_%28September_2014%29.svg.png",
 		title: "Google Chrome",
 		description: "Navegador de internet",
@@ -35,7 +35,7 @@ $(function(){
 	},
 	{
 		id: 3,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://cdn.worldvectorlogo.com/logos/mozilla-firefox-1.svg",
 		title: "Mozilla Firefox",
 		description: "Navegador de internet",
@@ -44,7 +44,7 @@ $(function(){
 	},
 	{
 		id: 4,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://cdn.worldvectorlogo.com/logos/mozilla-firefox-1.svg",
 		title: "Mozilla Firefox",
 		description: "Navegador de internet",
@@ -53,7 +53,7 @@ $(function(){
 	},
 	{
 		id: 5,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/1024px-Opera_2015_icon.svg.png",
 		title: "Opera",
 		description: "Navegador de internet",
@@ -62,7 +62,7 @@ $(function(){
 	},
 	{
 		id: 6,
-		grupo: eGrupoDownload.Brawser,
+		grupo: eGrupoDownload.Browser,
 		icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/1024px-Opera_2015_icon.svg.png",
 		title: "Opera",
 		description: "Navegador de internet",
@@ -259,31 +259,70 @@ $(function(){
 		url: "https://download2267.mediafire.com/xqh5p6chnr0g/9i4q62qhemsgwr0/Aprenda+a+digitar.rar"
 	}];
 	
+	let lstBtnFiltroGrupo = [];
+	function initBtnFiltroGrupo(){
 	
-	let $domListaProgramas = $("#lista-programas").append("<div class='row mt-2' id='row-list'></div>");
+		lstBtnFiltroGrupo.push(`
+		   <input type="radio" class="btn-check col-12 col-md-1" name="grupoDownload" id="todos" autocomplete="off" data-grupo="Todos" />
+		   <label class="btn btn-secondary btn-filtro" for="todos">Todos</label>
+		`);
+		
+		$.each(eGrupoDownload, function(i, data) {
+			lstBtnFiltroGrupo.push(`
+			   <input type="radio" class="btn-check col-12 col-md-1" name="grupoDownload" id="btn-${data}" autocomplete="off" data-grupo="${data}" />
+			   <label class="btn btn-secondary btn-filtro" for="btn-${data}">${data}</label>
+			`);
+		});
+		
+		$("#lst-radio-groups").append(lstBtnFiltroGrupo);
 	
-	for (let i = 0; i < listaDownloads.length; i++) {
-		let app = listaDownloads[i];
-		let htmlCard = document.createElement('div');
-		htmlCard.className = "col-12 col-md-3";
-		htmlCard.innerHTML = `
-			<div class="card mb-3">
-				<div class="card-header text-center">
-					<img src="${app.icon}" width="40" /><br />
-					<small><span class="badge badge-${app.arquitetura === eArquitetura.x86 ? "info" : app.arquitetura === eArquitetura.x64 ? "danger" : "warning" }">${app.arquitetura}</span></small>
-					<h4>
-						${app.title}
-					</h4>
-				</div>
-				<div class="card-body">
-					<p class="text-justify">${app.description}</p>
-				</div>
-				<div class="card-footer">
-					<button class="btn btn-primary w-100">Baixar</button>
-				</div>
-			</div>
-		`;
-				
-		$("#row-list").append(htmlCard);
 	}
+	
+	
+	let lstCardDownload = [];
+	function initListaCards(){
+		
+		for (let i = 0; i < listaDownloads.length; i++) {
+			let app = listaDownloads[i];
+			
+			lstCardDownload.push(`
+				<div class="col-12 col-md-3">
+					<div class="card mb-3" data-grupo="${app.grupo}">
+						<div class="card-header text-center">
+							<img src="${app.icon}" width="40" /><br />
+							<small><span class="badge badge-${app.arquitetura === eArquitetura.x86 ? "info" : app.arquitetura === eArquitetura.x64 ? "danger" : "warning" }">${app.arquitetura}</span></small>
+							<h4>
+								${app.title}
+							</h4>
+						</div>
+						<div class="card-body">
+							<p class="text-justify">${app.description}</p>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-primary w-100">Baixar</button>
+						</div>
+					</div>
+				</div>
+			`);
+		}
+				
+		$("#row-list").append(lstCardDownload);
+	}
+		
+		
+	initBtnFiltroGrupo();
+	initListaCards();
+	
+	
+	$("input[name='grupoDownload']").click(function(e){
+		let dataGrupoAux = this.attributes["data-grupo"].value;
+		
+		if(dataGrupoAux === "Todos"){
+			$(`.card[data-grupo]`).parent().css("display", "inline-block");
+		}
+		else {
+			$(`.card[data-grupo!='${dataGrupoAux}']`).parent().css("display", "none");
+			$(`.card[data-grupo='${dataGrupoAux}']`).parent().css("display", "inline-block");
+		}
+	});
 });
