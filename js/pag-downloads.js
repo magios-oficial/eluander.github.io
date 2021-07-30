@@ -265,7 +265,7 @@ $(function(){
 	for (let i = 0; i < listaDownloads.length; i++) {
 		let app = listaDownloads[i];
 		let htmlCard = document.createElement('div');
-		htmlCard.className = "col-3";
+		htmlCard.className = "col-6 col-md-3";
 		htmlCard.innerHTML = `
 			<div class="card mb-3">
 				<div class="card-header text-center">
